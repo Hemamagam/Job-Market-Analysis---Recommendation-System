@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recommended Jobs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Recommended Jobs</h1>
+        <ul class="list-group mt-3">
+            {% for recommendation in recommendations.iterrows() %}
+            <li class="list-group-item">
+                <h5>{{ recommendation[1]['title'] }}</h5>
+                <p><strong>Location:</strong> {{ recommendation[1]['country'] }}</p>
+                <a href="{{ recommendation[1]['link'] }}" class="btn btn-primary" target="_blank">View Job</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="mt-3">
+            <h3>Analysis:</h3>
+            <ul>
+                <li><a href="/market-trends" target="_blank">Market Trends</a></li>
+                <li><a href="/remote-work-trends" target="_blank">Remote Work Trends</a></li>
+                <li><a href="/predict-trends" target="_blank">Predicted Trends</a></li>
+            </ul>
+        </div>
+        <a href="/" class="btn btn-secondary mt-3">Back to Home</a>
+    </div>
+</body>
+</html>
