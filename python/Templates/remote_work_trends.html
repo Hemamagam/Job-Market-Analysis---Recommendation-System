@@ -1,14 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Remote Work Trends</title>
-</head>
-<body>
-    <h1>Remote Work Trends</h1>
-    <p>Total Jobs: {{ report.total_jobs }}</p>
-    <p>Remote Jobs: {{ report.remote_jobs }}</p>
-    <p>Non-Remote Jobs: {{ report.non_remote_jobs }}</p>
-    <p>Remote Jobs Percentage: {{ report.remote_percentage }}%</p>
-</body>
-</html>
+@app.route('/remote-work-trends')
+def remote_work_trends():
+    remote_jobs = data[data['category'] == 'Remote']
+    non_remote_jobs = data[data['category'] != 'Remote']
+    
+    total_jobs = len(data)
+    remote_jobs_count = len(remote_jobs)
+    non_remote_jobs_count = len(non_remote_jobs)
+    remote_percentage = (remote_jobs_count / total_jobs * 100) if total_jobs > 0 else 0
+    
+    report = {
+        'total_jobs': total_jobs,
+        'remote_jobs': remote_jobs_count,
+        'non_remote_jobs': non_remote_jobs_count,
+        'remote_percentage': remote_percentage
+    }
+    
+    return render_template('remote_work_trends.html', report=report)
