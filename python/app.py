@@ -22,7 +22,7 @@ data = pd.read_csv(csv_file_path)
 
 # Generate mock historical data
 dates = pd.date_range(start='2023-01-01', periods=12, freq='M')
-job_postings = [150 + i*10 for i in range(12)]  # Simulated job postings data
+job_postings = [150 + i * 10 for i in range(12)]  # Simulated job postings data
 historical_data = pd.DataFrame({'Month': dates, 'Job_Postings': job_postings})
 
 @app.route('/')
@@ -66,14 +66,19 @@ def market_trends():
 
 @app.route('/remote-work-trends')
 def remote_work_trends():
-    remote_jobs = data[data['Job Type'] == 'Remote']
-    non_remote_jobs = data[data['Job Type'] != 'Remote']
+    remote_jobs = data[data['category'] == 'Remote']
+    non_remote_jobs = data[data['category'] != 'Remote']
+    
+    total_jobs = len(data)
+    remote_jobs_count = len(remote_jobs)
+    non_remote_jobs_count = len(non_remote_jobs)
+    remote_percentage = (remote_jobs_count / total_jobs * 100) if total_jobs > 0 else 0
     
     report = {
-        'total_jobs': len(data),
-        'remote_jobs': len(remote_jobs),
-        'non_remote_jobs': len(non_remote_jobs),
-        'remote_percentage': len(remote_jobs) / len(data) * 100
+        'total_jobs': total_jobs,
+        'remote_jobs': remote_jobs_count,
+        'non_remote_jobs': non_remote_jobs_count,
+        'remote_percentage': remote_percentage
     }
     
     return render_template('remote_work_trends.html', report=report)
