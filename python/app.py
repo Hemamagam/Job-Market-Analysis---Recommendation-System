@@ -64,7 +64,11 @@ def market_trends():
     
     return render_template('market_trends.html', plot_url=plot_url)
 
-@app.route('/remote-work-trends')
+
+# List of remote-friendly countries
+remote_friendly_countries = ['United States', 'Canada', 'United Kingdom', 'Germany', 'Australia', 'India', 'Singapore', 'Netherlands', 'Israel', 'Ireland', 'Sweden', 'Switzerland', 'Denmark', 'Norway', 'Finland', 'New Zealand', 'Belgium', 'France', 'Spain', 'Italy', 'Japan', 'South Korea']
+
+@app.route('/remote_work_trends')
 def remote_work_trends():
     remote_jobs = data[data['category'] == 'Remote']
     non_remote_jobs = data[data['category'] != 'Remote']
@@ -81,7 +85,7 @@ def remote_work_trends():
         'remote_percentage': remote_percentage
     }
     
-    return render_template('remote_work_trends.html', report=report)
+    return render_template('remote_work_trends.html', report=report, remote_friendly_countries=remote_friendly_countries)
 
 @app.route('/predict-trends')
 def predict_trends():
