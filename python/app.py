@@ -68,8 +68,20 @@ def market_trends():
 # List of remote-friendly countries
 remote_friendly_countries = ['United States', 'Canada', 'United Kingdom', 'Germany', 'Australia', 'India', 'Singapore', 'Netherlands', 'Israel', 'Ireland', 'Sweden', 'Switzerland', 'Denmark', 'Norway', 'Finland', 'New Zealand', 'Belgium', 'France', 'Spain', 'Italy', 'Japan', 'South Korea']
 
+remote_friendly_countries = [
+    'United States', 'Canada', 'United Kingdom', 'Germany', 'Australia', 
+    'India', 'Singapore', 'Netherlands', 'Israel', 'Ireland', 'Sweden', 
+    'Switzerland', 'Denmark', 'Norway', 'Finland', 'New Zealand', 'Belgium', 
+    'France', 'Spain', 'Italy', 'Japan', 'South Korea'
+]
+
 @app.route('/remote_work_trends')
 def remote_work_trends():
+    # Check if 'location' column exists in the data
+    if 'location' not in data.columns:
+        return "Error: 'location' column is missing in the dataset", 400
+    
+    # Calculate remote job statistics
     remote_jobs = data[data['category'] == 'Remote']
     non_remote_jobs = data[data['category'] != 'Remote']
     
@@ -78,6 +90,7 @@ def remote_work_trends():
     non_remote_jobs_count = len(non_remote_jobs)
     remote_percentage = (remote_jobs_count / total_jobs * 100) if total_jobs > 0 else 0
     
+    # Prepare a report
     report = {
         'total_jobs': total_jobs,
         'remote_jobs': remote_jobs_count,
