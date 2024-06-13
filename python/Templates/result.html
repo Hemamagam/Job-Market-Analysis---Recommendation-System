@@ -9,11 +9,11 @@
     <div class="container">
         <h1 class="mt-5">Recommended Jobs</h1>
         <ul class="list-group mt-3">
-            {% for recommendation in recommendations.iterrows() %}
+            {% for index, recommendation in recommendations.iterrows() %}
             <li class="list-group-item">
-                <h5>{{ recommendation[1]['title'] }}</h5>
-                <p><strong>Location:</strong> {{ recommendation[1]['country'] }}</p>
-                <a href="{{ recommendation[1]['link'] }}" class="btn btn-primary" target="_blank">View Job</a>
+                <h5>{{ recommendation['title'] }}</h5>
+                <p><strong>Location:</strong> {{ recommendation['country'] }}</p>
+                <a href="{{ recommendation['link'] }}" class="btn btn-primary" target="_blank">View Job</a>
             </li>
             {% endfor %}
         </ul>
