@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remote Work Trends</title>
 </head>
 <body>
@@ -10,13 +9,6 @@
     <p>Total Jobs: {{ report.total_jobs }}</p>
     <p>Remote Jobs: {{ report.remote_jobs }}</p>
     <p>Non-Remote Jobs: {{ report.non_remote_jobs }}</p>
-    <p>Percentage of Remote Jobs: {{ report.remote_percentage }}%</p>
-
-    <h2>Remote-Friendly Countries</h2>
-    <ul>
-        {% for country in remote_friendly_countries %}
-            <li>{{ country }}</li>
-        {% endfor %}
-    </ul>
+    <p>Remote Jobs Percentage: {{ report.remote_percentage }}%</p>
 </body>
 </html>
