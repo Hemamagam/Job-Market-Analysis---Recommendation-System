@@ -22,7 +22,7 @@ data = pd.read_csv(csv_file_path)
 
 # Generate mock historical data
 dates = pd.date_range(start='2023-01-01', periods=12, freq='M')
-job_postings = [150 + i * 10 for i in range(12)]  # Simulated job postings data
+job_postings = [150 + i*10 for i in range(12)]  # Simulated job postings data
 historical_data = pd.DataFrame({'Month': dates, 'Job_Postings': job_postings})
 
 @app.route('/')
@@ -64,41 +64,19 @@ def market_trends():
     
     return render_template('market_trends.html', plot_url=plot_url)
 
-
-# List of remote-friendly countries
-remote_friendly_countries = ['United States', 'Canada', 'United Kingdom', 'Germany', 'Australia', 'India', 'Singapore', 'Netherlands', 'Israel', 'Ireland', 'Sweden', 'Switzerland', 'Denmark', 'Norway', 'Finland', 'New Zealand', 'Belgium', 'France', 'Spain', 'Italy', 'Japan', 'South Korea']
-
-remote_friendly_countries = [
-    'United States', 'Canada', 'United Kingdom', 'Germany', 'Australia', 
-    'India', 'Singapore', 'Netherlands', 'Israel', 'Ireland', 'Sweden', 
-    'Switzerland', 'Denmark', 'Norway', 'Finland', 'New Zealand', 'Belgium', 
-    'France', 'Spain', 'Italy', 'Japan', 'South Korea'
-]
-
-@app.route('/remote_work_trends')
+@app.route('/remote-work-trends')
 def remote_work_trends():
-    # Check if 'location' column exists in the data
-    if 'location' not in data.columns:
-        return "Error: 'location' column is missing in the dataset", 400
+    remote_jobs = data[data['Job Type'] == 'Remote']
+    non_remote_jobs = data[data['Job Type'] != 'Remote']
     
-    # Calculate remote job statistics
-    remote_jobs = data[data['category'] == 'Remote']
-    non_remote_jobs = data[data['category'] != 'Remote']
-    
-    total_jobs = len(data)
-    remote_jobs_count = len(remote_jobs)
-    non_remote_jobs_count = len(non_remote_jobs)
-    remote_percentage = (remote_jobs_count / total_jobs * 100) if total_jobs > 0 else 0
-    
-    # Prepare a report
     report = {
-        'total_jobs': total_jobs,
-        'remote_jobs': remote_jobs_count,
-        'non_remote_jobs': non_remote_jobs_count,
-        'remote_percentage': remote_percentage
+        'total_jobs': len(data),
+        'remote_jobs': len(remote_jobs),
+        'non_remote_jobs': len(non_remote_jobs),
+        'remote_percentage': len(remote_jobs) / len(data) * 100
     }
     
-    return render_template('remote_work_trends.html', report=report, remote_friendly_countries=remote_friendly_countries)
+    return render_template('remote_work_trends.html', report=report)
 
 @app.route('/predict-trends')
 def predict_trends():
