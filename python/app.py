@@ -45,6 +45,8 @@ def recommend():
     # Get recommended jobs
     recommendations = data.iloc[indices[0]]
 
+    recommendations_list = recommendations.to_dict('records')
+    
     return render_template('result.html', recommendations=recommendations)
 
 @app.route('/market-trends')
