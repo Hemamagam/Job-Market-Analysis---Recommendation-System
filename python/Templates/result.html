@@ -9,7 +9,7 @@
     <div class="container">
         <h1 class="mt-5">Recommended Jobs</h1>
         <ul class="list-group mt-3">
-            {% for index, recommendation in recommendations.iterrows() %}
+            {% for recommendation in recommendations %}
             <li class="list-group-item">
                 <h5>{{ recommendation['title'] }}</h5>
                 <p><strong>Location:</strong> {{ recommendation['country'] }}</p>
