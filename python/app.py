@@ -6,6 +6,8 @@ import io
 import base64
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
+from sklearn.linear_model import LinearRegression
+import numpy as np
 
 app = Flask(__name__)
 
@@ -20,9 +22,10 @@ with open('vectorizer.pkl', 'rb') as f:
 csv_file_path = 'D:/AI Course Digicrome/One Python/Nexthike-Project Work/Project 8- Job Analysis/Job-Market-Analysis---Recommendation-System/python/job_data.csv'
 data = pd.read_csv(csv_file_path)
 
-# Generate mock historical data
+# Generate mock historical data with some randomness
 dates = pd.date_range(start='2023-01-01', periods=12, freq='M')
-job_postings = [150 + i*10 for i in range(12)]  # Simulated job postings data
+np.random.seed(42)  # For reproducibility
+job_postings = 150 + np.cumsum(np.random.randint(-20, 20, size=12))  # Simulated job postings data with fluctuations
 historical_data = pd.DataFrame({'Month': dates, 'Job_Postings': job_postings})
 
 @app.route('/')
@@ -47,7 +50,7 @@ def recommend():
 
     recommendations_list = recommendations.to_dict('records')
     
-    return render_template('result.html', recommendations=recommendations)
+    return render_template('result.html', recommendations=recommendations_list)
 
 @app.route('/market-trends')
 def market_trends():
@@ -82,16 +85,24 @@ def remote_work_trends():
 
 @app.route('/predict-trends')
 def predict_trends():
-    # Use KNN model for prediction
-    model = NearestNeighbors(n_neighbors=1)
-    model.fit(historical_data[['Job_Postings']])
+    # Linear regression model for prediction
+    model = LinearRegression()
+    
+    # Prepare historical data for training
+    X = np.arange(len(historical_data)).reshape(-1, 1)
+    y = historical_data['Job_Postings']
+    model.fit(X, y)
     
     # Predict future job postings
-    future_months = pd.date_range(start='2023-01-01', periods=24, freq='M')
-    future_index = [[len(historical_data) + i] for i in range(24)]  # Predict for 2023 and 2024 (12 months each)
-    predictions = model.kneighbors(future_index, return_distance=False)
+    future_X = np.arange(len(historical_data), len(historical_data) + 12).reshape(-1, 1)
+    future_predictions = model.predict(future_X)
     
-    prediction_data = pd.DataFrame({'Month': future_months, 'Predicted_Job_Postings': [p[0] for p in predictions]})
+    print(f"Future predictions: {future_predictions}")  # Debugging statement
+    
+    future_months = pd.date_range(start=historical_data['Month'].iloc[-1] + pd.DateOffset(months=1), periods=12, freq='M')
+    prediction_data = pd.DataFrame({'Month': future_months, 'Predicted_Job_Postings': future_predictions})
+    
+    print(f"Prediction data: {prediction_data}")  # Debugging statement
     
     return render_template('predict_trends.html', prediction_data=prediction_data.to_dict(orient='records'))
 
