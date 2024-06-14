@@ -2,12 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Market Analysis</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Job Recommendation Engine</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Job Market Analysis and Recommendation System</h1>
-    <p>Use the endpoints to get insights and recommendations.</p>
+    <div class="container">
+        <h1 class="mt-5">Job Recommendation Engine</h1>
+        <form method="POST" action="/recommend" class="mt-3">
+            <div class="form-group">
+                <label for="description">Enter Job Description:</label>
+                <input type="text" class="form-control" id="description" name="description">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        {% if error %}
+        <div class="alert alert-danger mt-3" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+    </div>
 </body>
 </html>
