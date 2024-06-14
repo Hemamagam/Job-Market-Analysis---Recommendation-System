@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Job Details</h1>
+        <div class="card mt-3">
+            <div class="card-header">
+                {{ job_details['title'] }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Location: {{ job_details['country'] }}</h5>
+                <p class="card-text">Description: {{ job_details['keywords'] }}</p>
+                <p class="card-text">Budget: {{ job_details['budget'] }}</p>
+                <a href="{{ job_details['link'] }}" class="btn btn-primary">Apply Now</a>
+            </div>
+        </div>
+        <a href="/" class="btn btn-secondary mt-3">Back to Home</a>
+    </div>
+</body>
+</html>
+
