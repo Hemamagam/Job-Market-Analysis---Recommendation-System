@@ -14,10 +14,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose the port the app runs on
-EXPOSE 5000
+EXPOSE 5002
 
 # Set the environment variable to tell Flask it’s running in a Docker container
 ENV FLASK_RUN_HOST=127.0.0.1
 
 # Command to run the Flask app
-CMD ["flask", "run", "--port=5000", "--reload"]
+CMD ["flask", "run", "--port=5002", "--reload"]
