@@ -82,6 +82,30 @@ Tracking Monthly Job Postings Over Time
 
 Salary trend over time
 
+### Task 7: Investigate trends in the remote work landscape
+
+Monthly Analysis of Remote Job Postings Based on Keywords
+
+Visualization of Monthly Trends in Remote Job Postings
+
+Forecasting Remote Job Posting Trends Using Exponential Smoothing
+
+### Task 8: Predict future job market trends
+
+Analyze Monthly Job Postings by Year and Month
+
+Forecast Future Job Postings Using ARIMA Model
+
+Visualize Historical Data and Forecasted Job Postings
+
+Generate Predictive Analytics Report on Job Market Trends
+
+
+
+
+
+
+
 
 
 
