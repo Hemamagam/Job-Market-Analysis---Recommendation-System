@@ -73,6 +73,7 @@ Persisting Job Recommender Model and Vectorizer Using Pickle
 
 ### Task 5: Create a job recommendation engine based on current job postings
 
+Created Personalized job recommendation engine using FLASK app.py
 
 ### Task 6: Track changes in job market dynamics over months
 
@@ -99,6 +100,21 @@ Forecast Future Job Postings Using ARIMA Model
 Visualize Historical Data and Forecasted Job Postings
 
 Generate Predictive Analytics Report on Job Market Trends
+
+### Docker File
+
+Created Recommendation file
+
+Created python base image
+
+Setting the working directory in container
+
+Expose Ports
+
+Setting the environment variable
+
+Run the command
+
 
 
 
