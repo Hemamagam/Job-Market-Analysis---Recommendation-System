@@ -75,6 +75,8 @@ Persisting Job Recommender Model and Vectorizer Using Pickle
 
 Created Personalized job recommendation engine using FLASK app.py
 
+Attached Job search input, Job link details and result (impages attached)
+
 ### Task 6: Track changes in job market dynamics over months
 
 Monthly Trends in Job Postings, Hourly Rates, and Budgets
